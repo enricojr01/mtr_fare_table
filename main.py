@@ -1,10 +1,8 @@
-from random import choice
 from typing import TypeAlias, Annotated
 
 import uvicorn
-from fastapi import FastAPI, HTTPException, Request, Form
+from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
-from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from jinja2 import Environment, PackageLoader, select_autoescape
 from starlette.templating import _TemplateResponse
@@ -17,10 +15,11 @@ loader: PackageLoader = PackageLoader("fare_calculator")
 env: Environment = Environment(loader=loader, autoescape=select_autoescape)
 templates: Jinja2Templates = Jinja2Templates(env=env)
 
-# NOTE: Jinja2Templates returns a _TemplateResponse
+# NOTE: Jinja2Templates returns a _TemplateResponse, which is just a wrapper
+#       around the Starlette class of the same name.
+#       I might just be able to import TemplateResponse directly but I'm
+#       not sure.
 TemplateResponse: TypeAlias = _TemplateResponse
-
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/", response_class=HTMLResponse)
 def root(request: Request) -> dict:
@@ -43,9 +42,12 @@ def form_submit(
         "stations": STATIONS,
         "fares": fares
     }
-    return templates.TemplateResponse(
-        request=request, name="index.html.jinja2", context=context
-    )
+    kwargs: dict = {
+        "request": request,
+        "name": "index.html.jinja2",
+        "context": context
+    }
+    return templates.TemplateResponse(**kwargs)
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="debug")
