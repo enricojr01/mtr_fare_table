@@ -15,10 +15,10 @@
         rel="stylesheet"
     >
 </head>
-<body>
+<body class="container d-flex justify-content-center align-items-center h-100" style="min-height: 100vh;">
     <div class="container">
         {# Title Bar #}
-        <div class="row border pt-2">
+        <div class="row pt-2">
             <div class="col-3"></div>
             <div class="col"><h1>Hong Kong MTR Fare Calculator</h1></div>
             <div class="col-2"></div>
@@ -32,15 +32,15 @@
                         <tr>
                             <th>Start</th>
                             <th>Destination</th>
-                            <th>Adult Fare (Octopus)</th>
-                            <th>Student Fare (Octopus)</th>
-                            <th>Over 60 Fare</th>
-                            <th>Adult Fare (regular)</th>
-                            <th>Concessionary Child Fare</th>
-                            <th>Concessionary Elderly Fare</th>
-                            <th>Concessionary PWD Fare (Octopus)</th>
-                            <th>Single Child</th>
-                            <th>Single Adult</th>
+                            <th title="via Octopus Card">Adult Fare</th>
+                            <th title="via personalized Octopus Card">Student Fare</th>
+                            <th title="via JoyYou Card">Over 60 Fare</th>
+                            <th title="Includes Students">Adult Single Journey Ticket</th>
+                            <th title="via Octopus Card">Child Fare / Elderly Fare</th>
+                            <th title="via JoyYou Card, age 65 and above">Elderly Fare</th>
+                            <th title="via Octopus Card">Concession PWD Fare </th>
+                            <th title="">Concession Single Child Ticket</th>
+                            <th title="">Concession Single Adult Ticket</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,15 +48,15 @@
                         <tr>
                             <td>{{ item.SRC_STATION_NAME }}</td>
                             <td>{{ item.DEST_STATION_NAME }}</td>
-                            <td>{{ item.OCT_ADT_FARE }}</td>
-                            <td>{{ item.OCT_STD_FARE }}</td>
-                            <td>{{ item.OCT_JOYYOU_SIXTY_FARE }}</td>
-                            <td>{{ item.SINGLE_ADT_FARE }}</td>
-                            <td>{{ item.OCT_CON_CHILD_FARE }}</td>
-                            <td>{{ item.OCT_CON_ELDERLY_FARE }}</td>
-                            <td>{{ item.OCT_CON_PWD_FARE }}</td>
-                            <td>{{ item.SINGLE_CON_CHILD_FARE }}</td>
-                            <td>{{ item.SINGLE_CON_ELDERLY_FARE }}</td>
+                            <td>HKD {{ item.OCT_ADT_FARE }}</td>
+                            <td>HKD {{ item.OCT_STD_FARE }}</td>
+                            <td>HKD {{ item.OCT_JOYYOU_SIXTY_FARE }}</td>
+                            <td>HKD {{ item.SINGLE_ADT_FARE }}</td>
+                            <td>HKD {{ item.OCT_CON_CHILD_FARE }}</td>
+                            <td>HKD {{ item.OCT_CON_ELDERLY_FARE }}</td>
+                            <td>HKD {{ item.OCT_CON_PWD_FARE }}</td>
+                            <td>HKD {{ item.SINGLE_CON_CHILD_FARE }}</td>
+                            <td>HKD {{ item.SINGLE_CON_ELDERLY_FARE }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -84,7 +84,7 @@
                         <option value="{{ station }}">{{ station }}</option>
                     {% endfor %}
                     </select>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary my-2">Submit</button>
                 </form>
             </div>
         </div>
