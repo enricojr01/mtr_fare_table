@@ -24,4 +24,4 @@ I went with an old-fashioned server-rendered template using Jinja2 and FastAPI's
 1. Clone the repository.
 1. Build the image using `podman build -t <whatever> .` (substitute with `docker build` if you're using Docker, it should work just fine)
 1. Run the image with `podman run`, make sure to forward port 8000 from the container to a port on the host.
-1. Visit in browser at the appropraite port.
+1. Visit in browser at the appropriate port.
